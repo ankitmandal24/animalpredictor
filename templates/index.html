@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Classifier</title>
+</head>
+<body>
+    <h1>Image Classifier</h1>
+
+    <!-- Add an empty image tag with an ID to display the uploaded image -->
+    <img id="uploaded-image" src="" alt="Uploaded Image" style="max-width: 400px">
+
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".jpg, .jpeg, .png">
+        <input type="submit" value="Predict">
+    </form>
+
+    <!-- Add a div to display the prediction result -->
+    <div id="prediction-result">
+        <!-- The prediction result will be displayed here -->
+    </div>
+
+    <script>
+        // JavaScript code to display the uploaded image
+        document.querySelector('input[type="file"]').addEventListener('change', function () {
+            const fileInput = this;
+            const imageElement = document.getElementById('uploaded-image');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imageElement.src = e.target.result;
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+    </script>
+</body>
+</html>
